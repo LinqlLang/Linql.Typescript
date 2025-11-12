@@ -120,9 +120,9 @@ export class SomeClass
 //Ignore nullable string
 search.Where(r => r.StringProperty!.Contains("A")).ToListAsync();
 //Check for not null and then cast to INullable
-const notNull = search.Where(r => r.NullableInteger !== undefined && (r.NullableInteger as any as INullable<number>).Value === 1);
+const notNull = search.Where(r => (r.NullableInteger as any as INullable<number>).HasValue && (r.NullableInteger as any as INullable<number>).Value === 1);
 //Get where Is Null
-const isNull = search.Where(r => r.NullableInteger === undefined);
+const isNull = search.Where(r => !(r.NullableInteger as any as INullable<number>).HasValue);
 ```
 ## Dynamic Queries
 
